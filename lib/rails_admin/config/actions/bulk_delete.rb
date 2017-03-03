@@ -33,7 +33,7 @@ module RailsAdmin
                 @objects = list_entries(@model_config, :destroy)
                 unless @objects.blank?
                   processed_objects = @abstract_model.destroy(@objects)
-                  destroyed = processed_objects.select(&:destroyed?)
+                  destroyed = processed_objects.select(&:deleted?)
                   not_destroyed = processed_objects - destroyed
                   destroyed.each do |object|
                     @auditing_adapter && @auditing_adapter.delete_object(object, @abstract_model, _current_user)
